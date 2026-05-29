@@ -1,0 +1,26 @@
+
+{
+  "employees": [
+    {
+      "id": 1,
+      "employeeName": "John Doe",
+      "email": "john@gmail.com",
+      "password": "12345",
+      "gender": "Male",
+      "contactNo": "0712345678",
+      "department": "IT",
+      "role": "Developer"
+    },
+    {
+      "id": 2,
+      "employeeName": "Sarah James",
+      "email": "sarah@gmail.com",
+      "password": "12345",
+      "gender": "Female",
+      "contactNo": "0755555555",
+      "department": "HR",
+      "role": "Manager"
+    }
+  ]
+}
+
