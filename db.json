@@ -1,0 +1,65 @@
+{
+  "employees": [
+    {
+      "id": "1",
+      "name": "John Doe",
+      "email": "john@gmail.com",
+      "password": "12345",
+      "gender": "Male",
+      "contactNo": "0712345678",
+      "department": "IT",
+      "role": "Developer"
+    },
+    {
+      "id": "2",
+      "name": "Sarah James",
+      "email": "sarah@gmail.com",
+      "password": "12345",
+      "gender": "Female",
+      "contactNo": "0755555555",
+      "department": "HR",
+      "role": "Manager"
+    },
+    {
+      "name": "kassim mbonde",
+      "email": "admin",
+      "password": "mimi",
+      "gender": "Female",
+      "contactNo": "0789757686972879",
+      "department": "IT",
+      "role": "design",
+      "id": "gF-SGf-RC44"
+    },
+    {
+      "name": "mariamu",
+      "email": "admin",
+      "password": "password",
+      "gender": "Male",
+      "contactNo": "07652839405019",
+      "department": "IT",
+      "role": "programmer",
+      "id": "8s_yyztMex8"
+    },
+    {
+      "name": "liwema kibonde",
+      "email": "liwana@gmail.com",
+      "password": "password",
+      "gender": "Male",
+      "contactNo": "0712495054",
+      "department": "IT",
+      "role": "design",
+      "id": "o1F2k86iAc0"
+    },
+    {
+      "name": "kiwalani kato",
+      "email": "katto@gmail.com",
+      "password": "katto",
+      "gender": "Male",
+      "contactNo": "078965451346",
+      "department": "IT",
+      "role": "desin",
+      "id": "EVMT0fpASL8"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

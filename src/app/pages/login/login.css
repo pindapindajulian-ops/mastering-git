@@ -75,3 +75,20 @@ button[type="submit"]:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
 }
+
+.registration-link {
+    color: #555;
+    font-size: 14px;
+    margin-top: 18px;
+    text-align: center;
+}
+
+.registration-link a {
+    color: #667eea;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.registration-link a:hover {
+    text-decoration: underline;
+}

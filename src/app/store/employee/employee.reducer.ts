@@ -14,7 +14,9 @@ export const employeeReducer = createReducer(
 
     ...state,
 
-    loading: true
+    loading: true,
+
+    error: ''
 
   })),
 
@@ -24,10 +26,27 @@ export const employeeReducer = createReducer(
 
     loading: false,
 
-    employees: action.employees
+    employees: action.employees,
+
+    error: ''
 
   })),
 
+  on(EmployeeActions.addEmployee, (state) => ({
+
+    ...state,
+
+    loading: true,
+
+    error: ''
+
+  })),
+
+  on(EmployeeActions.deleteEmployee, (state) => ({
+  ...state,
+  loading: true,
+  error: ''
+  })),
   on(EmployeeActions.loadEmployeesFailure, (state, action) => ({
 
     ...state,

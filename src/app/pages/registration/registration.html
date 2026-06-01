@@ -1,0 +1,113 @@
+<div class="registration-page">
+  <form class="registration-form" (ngSubmit)="registerEmployee()">
+    <div class="form-header">
+      <h2>Employee Registration</h2>
+      <p>Fill your information and upload your certificate as PDF.</p>
+    </div>
+
+    <div class="form-grid">
+      <div class="form-field">
+        <label for="name">Full Name *</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          [(ngModel)]="employeeObj.name"
+          placeholder="Enter full name"
+          minlength="2"
+          required
+        />
+      </div>
+
+      <div class="form-field">
+        <label for="email">Email *</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="employeeObj.email"
+          placeholder="Enter email"
+          required
+        />
+      </div>
+
+      <div class="form-field">
+        <label for="password">Password *</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          [(ngModel)]="employeeObj.password"
+          placeholder="Enter password"
+          required
+        />
+      </div>
+
+      <div class="form-field">
+        <label for="gender">Gender *</label>
+        <select id="gender" name="gender" [(ngModel)]="employeeObj.gender" required>
+          <option value="">Select Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label for="contactNo">Contact No *</label>
+        <input
+          type="text"
+          id="contactNo"
+          name="contactNo"
+          [(ngModel)]="employeeObj.contactNo"
+          placeholder="Example: 0712345678"
+          minlength="10"
+          maxlength="15"
+          required
+        />
+      </div>
+
+      <div class="form-field">
+        <label for="department">Department *</label>
+        <select id="department" name="department" [(ngModel)]="employeeObj.department" required>
+          <option value="">Select Department</option>
+          <option value="IT">IT</option>
+          <option value="HR">HR</option>
+          <option value="Finance">Finance</option>
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label for="role">Role *</label>
+        <input
+          type="text"
+          id="role"
+          name="role"
+          [(ngModel)]="employeeObj.role"
+          placeholder="Enter role"
+          required
+        />
+      </div>
+
+      <div class="form-field">
+        <label for="certificate">Certificate PDF (optional)</label>
+        <input
+          type="file"
+          id="certificate"
+          name="certificate"
+          accept="application/pdf"
+          (change)="onCertificateSelected($event)"
+        />
+        @if(selectedFileName) {
+          <span class="file-name">{{ selectedFileName }}</span>
+        }
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" [disabled]="isSubmitting">
+        {{ isSubmitting ? 'Submitting...' : 'Register' }}
+      </button>
+      <a routerLink="/login">Back to Login</a>
+    </div>
+  </form>
+</div>

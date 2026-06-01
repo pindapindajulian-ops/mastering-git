@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
@@ -21,6 +21,8 @@ export class Login {
     // Username: admin | Password: password
     if (this.loginobj.email === "admin" && this.loginobj.password === "password") {
       console.log("Login successful!");
+      localStorage.setItem('userRole', 'admin');
+      localStorage.setItem('isLoggedIn', 'true');
       // Redirect to dashboard after successful login
       this.router.navigate(['/dashboard']);
     } else {

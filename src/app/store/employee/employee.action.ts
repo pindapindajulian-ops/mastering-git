@@ -18,7 +18,7 @@ export const addEmployee = createAction(
 
 export const deleteEmployee = createAction(
   '[Employee] Delete Employee',
-  props<{ id:number }>()
+  props<{ id: number | string }>()
 );
 
 export const loadEmployeesFailure = createAction(

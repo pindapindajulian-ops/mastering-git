@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Employee } from '../../store/employee/employee.model';
@@ -7,29 +7,26 @@ import { Employee } from '../../store/employee/employee.model';
   providedIn: 'root'
 })
 export class EmployeeService {
+  private http = inject(HttpClient);
+  private apiUrl = '/api/employees';
 
-  private apiUrl = 'http://localhost:3000/employees';
-
-  constructor(private http: HttpClient) {}
-
-  // GET ALL EMPLOYEES
   getEmployees(): Observable<Employee[]> {
+    console.log('Fetching employees from:', this.apiUrl);
     return this.http.get<Employee[]>(this.apiUrl);
   }
 
-  // ADD EMPLOYEE
   addEmployee(employee: Employee): Observable<Employee> {
+    console.log('Adding employee:', employee);
     return this.http.post<Employee>(this.apiUrl, employee);
   }
 
-  // DELETE EMPLOYEE
-  deleteEmployee(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+  deleteEmployee(id: number | string): Observable<void> {
+    console.log('Deleting employee with id:', id);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  // UPDATE EMPLOYEE (tunaiweka kwa next step lakini ipo tayari)
   updateEmployee(employee: Employee): Observable<Employee> {
+    console.log('Updating employee:', employee);
     return this.http.put<Employee>(`${this.apiUrl}/${employee.id}`, employee);
   }
-
 }
