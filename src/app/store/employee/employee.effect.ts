@@ -20,7 +20,7 @@ export class EmployeeEffects {
             EmployeeActions.loadEmployeesSuccess({ employees })
           ),
           catchError((error: Error) =>
-            of(EmployeeActions.loadEmployeesFailure({ error: getEmployeeErrorMessage(error) }))
+            of(EmployeeActions.loadEmployeesFailure({ error: error.message }))
           )
         )
       )
@@ -40,7 +40,7 @@ export class EmployeeEffects {
           catchError((error: Error) => {
             console.error(' ADD EMPLOYEE ERROR:', error);
             return of(EmployeeActions.loadEmployeesFailure({
-              error: getEmployeeErrorMessage(error)
+              error: error.message || 'Failed to add employee'
             }));
           })
         )
@@ -61,23 +61,11 @@ export class EmployeeEffects {
           catchError((error: Error) => {
             console.error('❌ DELETE EMPLOYEE ERROR:', error);
             return of(EmployeeActions.loadEmployeesFailure({
-              error: getEmployeeErrorMessage(error)
+              error: error.message || 'Failed to delete employee'
             }));
           })
         )
       )
     )
   );
-}
-
-function getEmployeeErrorMessage(error: Error): string {
-  if (error.message?.includes('Http failure during parsing')) {
-    return 'API returned a web page instead of employee data. Make sure you run "npm run api" and restart "npm start".';
-  }
-
-  if (error.message?.includes('Http failure response') && error.message.includes(': 0 ')) {
-    return 'Cannot connect to the employee API. Run "npm run api" in another terminal.';
-  }
-
-  return error.message || 'Employee request failed';
 }

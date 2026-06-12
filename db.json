@@ -51,14 +51,14 @@
       "id": "o1F2k86iAc0"
     },
     {
-      "name": "kiwalani kato",
-      "email": "katto@gmail.com",
-      "password": "katto",
+      "name": "mimi jumakiongosi",
+      "email": "kihogosi@gmail.com",
+      "password": "password",
       "gender": "Male",
-      "contactNo": "078965451346",
-      "department": "IT",
-      "role": "desin",
-      "id": "EVMT0fpASL8"
+      "contactNo": "078976758697",
+      "department": "Finance",
+      "role": "Accountant",
+      "id": "1780501697325-47x6hc"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

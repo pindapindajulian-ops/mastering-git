@@ -1,6 +1,7 @@
 import { Component, OnInit, PLATFORM_ID, signal, inject } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as EmployeeActions from '../../store/employee/employee.action';
@@ -43,7 +44,7 @@ export class Employee implements OnInit {
     role: ''
   };
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private router: Router) {}
 
   ngOnInit(): void {
     // Select data from store
@@ -209,6 +210,20 @@ export class Employee implements OnInit {
     setTimeout(() => {
       document.querySelector('form')?.scrollIntoView({ behavior: 'smooth' });
     }, 100);
+  }
+
+  viewEmployeeDetails(employee: EmployeeModel) {
+    if (!employee?.id) {
+      return;
+    }
+
+    this.router.navigate(['/employee-detail'], {
+      queryParams: { id: employee.id }
+    });
+  }
+
+  goToEmployeeSearch() {
+    this.router.navigate(['/employee-detail']);
   }
 
   // Track by function for better performance

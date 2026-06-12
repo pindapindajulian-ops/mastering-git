@@ -1,6 +1,8 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const { buildSchema } = require('graphql');
+const { graphqlHTTP } = require('express-graphql');
 
 const app = express();
 const port = 3000;
@@ -19,6 +21,94 @@ app.use((req, res, next) => {
 
   return next();
 });
+
+const schema = buildSchema(`
+  type Employee {
+    id: ID!
+    name: String!
+    email: String!
+    password: String!
+    gender: String!
+    contactNo: String!
+    department: String!
+    role: String!
+    certificateName: String
+    certificateType: String
+    certificateData: String
+  }
+
+  type Query {
+    employees: [Employee!]!
+    employee(id: ID!): Employee
+  }
+
+  type Mutation {
+    addEmployee(input: EmployeeInput!): Employee!
+    updateEmployee(id: ID!, input: EmployeeInput!): Employee!
+    deleteEmployee(id: ID!): Boolean!
+  }
+
+  input EmployeeInput {
+    name: String!
+    email: String!
+    password: String!
+    gender: String!
+    contactNo: String!
+    department: String!
+    role: String!
+    certificateName: String
+    certificateType: String
+    certificateData: String
+  }
+`);
+
+const rootValue = {
+  employees: () => {
+    const db = readDb();
+    return db.employees || [];
+  },
+  employee: ({ id }) => {
+    const db = readDb();
+    return (db.employees || []).find((employee) => String(employee.id) === String(id)) || null;
+  },
+  addEmployee: ({ input }) => {
+    const db = readDb();
+    const employee = { ...input, id: createId() };
+    db.employees = [...(db.employees || []), employee];
+    writeDb(db);
+    return employee;
+  },
+  updateEmployee: ({ id, input }) => {
+    const db = readDb();
+    const employees = db.employees || [];
+    const index = employees.findIndex((employee) => String(employee.id) === String(id));
+    if (index === -1) {
+      throw new Error('Employee not found');
+    }
+    const employee = { ...employees[index], ...input, id: employees[index].id };
+    employees[index] = employee;
+    db.employees = employees;
+    writeDb(db);
+    return employee;
+  },
+  deleteEmployee: ({ id }) => {
+    const db = readDb();
+    const employees = db.employees || [];
+    const initialLength = employees.length;
+    db.employees = employees.filter((employee) => String(employee.id) !== String(id));
+    if (db.employees.length === initialLength) {
+      return false;
+    }
+    writeDb(db);
+    return true;
+  }
+};
+
+app.use('/graphql', graphqlHTTP({
+  schema,
+  rootValue,
+  graphiql: true,
+}));
 
 app.get(['/employees', '/api/employees'], (req, res) => {
   const db = readDb();

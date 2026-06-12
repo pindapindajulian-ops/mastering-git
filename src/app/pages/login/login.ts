@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { EmployeeService } from '../../core/services/employee';
 
 @Component({
   selector: 'app-login',
@@ -15,18 +16,41 @@ export class Login {
     password: ''
   }
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private employeeService: EmployeeService
+  ) {}
 
   onLogin() {
-    // Username: admin | Password: password
-    if (this.loginobj.email === "admin" && this.loginobj.password === "password") {
-      console.log("Login successful!");
-      localStorage.setItem('userRole', 'admin');
-      localStorage.setItem('isLoggedIn', 'true');
-      // Redirect to dashboard after successful login
-      this.router.navigate(['/dashboard']);
-    } else {
-      alert("Invalid email or password! Use: admin / password");
-    }
+    this.employeeService.getEmployees().subscribe({
+      next: (employees) => {
+        const user = employees.find(
+          (employee) =>
+            employee.email?.toLowerCase() === this.loginobj.email?.toLowerCase() &&
+            employee.password === this.loginobj.password
+        );
+
+        if (!user) {
+          alert('Invalid email or password. Please register or try again.');
+          return;
+        }
+
+        const authRole =
+          user.email?.toLowerCase() === 'admin' && user.password === 'password'
+            ? 'admin'
+            : 'user';
+
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('userRole', authRole);
+        localStorage.setItem('currentUser', JSON.stringify(user));
+
+        console.log('Login successful:', user.email, authRole);
+        this.router.navigate(['/dashboard']);
+      },
+      error: (error) => {
+        console.error('LOGIN ERROR:', error);
+        alert('Login failed. Start the API server with: npm run api');
+      }
+    });
   }
 }

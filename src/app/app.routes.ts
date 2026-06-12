@@ -6,6 +6,7 @@ import { Employee } from './pages/employee/employee';
 import { Project } from './pages/project/project';
 import { Projectemployee } from './pages/projectemployee/projectemployee';
 import { Attendance } from './pages/attendance/attendance';
+import { EmployeeDetail } from './pages/employee-detail/employee-detail';
 import { adminGuard } from './core/guards/admin.guard';
 import { Registration } from './pages/registration/registration';
 
@@ -36,6 +37,10 @@ export const routes: Routes = [
       {
         path: 'employee',
         component: Employee,
+      },
+      {
+        path: 'employee-detail',
+        component: EmployeeDetail,
       },
       {
         path: 'project',

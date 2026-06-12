@@ -6,11 +6,7 @@ export const adminGuard: CanActivateFn = () => {
   const router = inject(Router);
   const platformId = inject(PLATFORM_ID);
 
-  if (
-    isPlatformBrowser(platformId) &&
-    localStorage.getItem('isLoggedIn') === 'true' &&
-    localStorage.getItem('userRole') === 'admin'
-  ) {
+  if (isPlatformBrowser(platformId) && localStorage.getItem('isLoggedIn') === 'true') {
     return true;
   }
 
