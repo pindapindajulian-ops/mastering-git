@@ -59,6 +59,29 @@
       "department": "Finance",
       "role": "Accountant",
       "id": "1780501697325-47x6hc"
+    },
+    {
+      "name": "kimanbi",
+      "email": "juliazed@gmail.com",
+      "password": "password",
+      "gender": "Male",
+      "contactNo": "078976758697",
+      "department": "IT",
+      "role": "Accountant",
+      "id": "1781772794110-ztpfhb"
+    },
+    {
+      "name": "hamisi ramadhani",
+      "email": "hamisikiiza@gmail.com",
+      "password": "hamisi@123",
+      "gender": "Male",
+      "contactNo": "0789757819",
+      "department": "IT",
+      "role": "programmer",
+      "certificateName": "",
+      "certificateType": "",
+      "certificateData": "",
+      "id": "1781772986800-9kjtqp"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

@@ -35,10 +35,8 @@ export class Login {
           return;
         }
 
-        const authRole =
-          user.email?.toLowerCase() === 'admin' && user.password === 'password'
-            ? 'admin'
-            : 'user';
+        // Determine if user is admin based on user role field or isAdmin flag
+        const authRole = user.role?.toLowerCase() === 'admin' ? 'admin' : 'user';
 
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('userRole', authRole);

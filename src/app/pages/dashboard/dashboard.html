@@ -1,1 +1,27 @@
-<p>dashboard works!</p>
+<div class="dashboard-container">
+  <!-- Main Content -->
+  <div class="dashboard-header">
+    <div class="header-top">
+      <div>
+        <h1>Welcome, {{ userName }}</h1>
+        <p class="user-role" [class.admin-role]="userRole === 'admin'">
+          {{ userRole === 'admin' ? 'Administrator' : 'Employee' }}
+        </p>
+      </div>
+      <button (click)="onLogout()" class="logout-btn">Logout</button>
+    </div>
+  </div>
+
+  <div class="dashboard-grid">
+    <div
+      *ngFor="let feature of visibleFeatures"
+      class="feature-card"
+      (click)="navigateTo(feature.route)"
+    >
+      <div class="feature-icon">{{ feature.icon }}</div>
+      <h3 class="feature-title">{{ feature.title }}</h3>
+      <p class="feature-description">{{ feature.description }}</p>
+      <div class="feature-badge" *ngIf="feature.adminOnly && userRole === 'admin'">Admin Only</div>
+    </div>
+  </div>
+</div>
